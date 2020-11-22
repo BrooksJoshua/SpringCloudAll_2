@@ -1,0 +1,22 @@
+server:
+  port: 8001
+
+
+
+spring:
+  datasource:
+    driver-class-name: org.gjt.mm.mysql.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/springcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: root
+    druid:
+      validation-query: select 1
+  application:
+      name: cloud-payment-service
+
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.lee.springcloud.com.lee.springcloud.entities
