@@ -3,7 +3,7 @@ package com.lee.springcloud.controller;
 import com.lee.springcloud.entities.CommonResult;
 import com.lee.springcloud.entities.Payment;
 import com.lee.springcloud.service.PaymentService;
- import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -14,14 +14,13 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@Slf4j //lombok下的注解, 加了该注解就不用显示的实例化logger,而是直接调用log.info()等
+@Slf4j
 public class PaymentController {
 
     //private static final LoggerFactory logger=LoggerFactory.getLogger(PaymentController.class);
+
     @Resource
     private DiscoveryClient discoveryClient; //注意是cloud包下的, 不要导错了导成Netflix
-
-
     @Resource
     PaymentService paymentService;
 
@@ -54,22 +53,17 @@ public class PaymentController {
     }
 
 
-
-
-
     @GetMapping(value = "/payment/discovery",produces = "application/json; charset=UTF-8")
     public Object discovery(){
-    List<String> services = discoveryClient.getServices();
-    for (String element : services) {
-        log.info("***** element:"+element);
-    }
-    List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
-    for (ServiceInstance instance : instances) {
-        log.info(instance.getServiceId()+"\t"+instance.getHost()+"\t"+instance.getPort()+"\t"+instance.getUri()); //打印日志两行:
-        // CLOUD-PAYMENT-SERVICE	192.168.10.104	8002	http://192.168.10.104:8002
-        //CLOUD-PAYMENT-SERVICE	192.168.10.104	8001	http://192.168.10.104:8001
-    }
-    return this.discoveryClient;
+        List<String> services = discoveryClient.getServices();
+        for (String element : services) {
+            log.info("***** element:"+element);
+        }
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        for (ServiceInstance instance : instances) {
+            log.info(instance.getServiceId()+"\t"+instance.getHost()+"\t"+instance.getPort()+"\t"+instance.getUri());
+        }
+        return this.discoveryClient;
     }
 
 }

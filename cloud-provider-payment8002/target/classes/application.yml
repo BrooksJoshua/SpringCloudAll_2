@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8002
 
 spring:
   application:
@@ -28,5 +28,9 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
   instance:
-    instance-id: payment01
+    instance-id: payment02
     prefer-ip-address: true
+    #心跳检测时间间隔,单位为秒S,默认30秒
+    lease-renewal-interval-in-seconds: 3
+    #离上一次接收心跳检测后,经过的时间间隔后,将服务从eureka注册信息中删除,单位为秒S,默认90秒,该值至少要比lease-renewal-interval-in-seconds大
+    lease-expiration-duration-in-seconds: 9

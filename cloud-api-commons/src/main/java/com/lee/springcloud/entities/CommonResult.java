@@ -1,6 +1,5 @@
-package com.lee.springcloud.vo;
+package com.lee.springcloud.entities;
 
-import com.lee.springcloud.entities.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
